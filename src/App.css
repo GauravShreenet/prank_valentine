@@ -1,0 +1,126 @@
+.card {
+  background: white;
+  padding: 3rem;
+  border-radius: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+/* Style for the guilt-trip message div */
+.message-display {
+  background-color: #fff0f3;
+  color: #ff4d6d;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 20px 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+  min-height: 60px; /* Keeps card height stable */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #ffb3c1;
+}
+
+.title {
+  color: #c9184a;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.btn-group {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.yes-btn {
+  background-color: #43aa8b;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  z-index: 10; /* Keep it below No button or above depending on prank */
+}
+
+.no-btn {
+  background-color: #ff4d6d;
+  color: white;
+  padding: 18px 30px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 1000;
+  touch-action: none;
+  transition: all 0.3s ease;
+}
+
+.success-text {
+  color: #ff4d6d !important; /* Force a pink/red color */
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  /* Add a text shadow to make it pop even more */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+/* Also ensure your p tag inside the card is visible */
+.card p {
+  color: #4a4a4a; /* Dark grey for secondary text */
+  font-size: 1.1rem;
+}
+
+.page-wrapper {
+  position: relative; /* Context for absolute positioning */
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+   /* --- FIX: These lines ensure the image covers the screen --- */
+   background-size: cover;           /* Ensures it fills the screen */
+   background-position: center;      /* Centers the main focus of the image */
+   background-repeat: no-repeat;     /* Prevents tiling */
+   background-attachment: fixed;     /* Keeps background static when scrolling (if you add scroll) */
+}
+
+.sad-gif {
+  position: absolute;
+  bottom: 2%;
+  right: 43%; /* Moves it to the bottom right corner outside the card */
+  height: 250px;
+  width: 300px;
+  border-radius: 15px;
+  z-index: 0;
+  background: white;
+}
+
+.card {
+  z-index: 10;
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Ensure existing gif style for the success message is still there */
+.gif {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
