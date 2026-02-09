@@ -1,15 +1,21 @@
 import { useState } from 'react'
 import './App.css'
 import backgroundImage from './assets/background.jpg'
+import imageCouple from './assets/couple.jpg'
 
+const initialRomanticMessage = "Bidhya, 11 years later and you’re still the first person I want to tell everything to. I don’t want you to be my Valentine just because we're married. I want to ask because I still choose you, every single day.";
 
-// 1. MUST define phrases outside the component
 const phrases = [
-  "Please", "Are you sure?", "Really sure?", "Think again!", 
-  "Last chance!", "Surely not?", "You're heartless!", "Please? 🥺"
-]
+  "Are you sure?", 
+  "Really sure?", 
+  "Think again!", 
+  "Last chance!", 
+  "Surely not?", 
+  "You're heartless!", 
+  "Please? 🥺", 
+  "Why are you being so mean!"
+];
 
-// 2. MUST define your sad GIFs links here
 const sadGifs = [
   "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExY245c210Y2EweDRvNnN5OGg4N2ZwZzk5anBiYjkzdHRhbXQ0cXY2YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/W0c3xcZ3F1d0EYYb0f/giphy.gif",
   "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzFnc2EyaGFyZ2hhMDlzZHA2dDA0aGMzNmJya3YzNDEyNHo1YzZpbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12Bpme5pTzGmg8/giphy.gif",
@@ -22,42 +28,51 @@ const sadGifs = [
 ]
 
 function App() {
-  // We start with isMoved as false so it stays next to Yes initially
-  const [noProps, setNoProps] = useState({ top: 'auto', left: 'auto', isMoved: false })
-  const [msgIndex, setMsgIndex] = useState(0)
-  const [accepted, setAccepted] = useState(false)
+  const [noProps, setNoProps] = useState({ top: 'auto', left: 'auto', isMoved: false });
+  const [msgIndex, setMsgIndex] = useState(-1); 
+  const [accepted, setAccepted] = useState(false);
 
   const handleNoInteraction = (e) => {
-    if (e.type === 'touchstart') e.preventDefault()
+    if (e.type === 'touchstart') e.preventDefault();
     
-    // Teleport logic
-    const randomTop = Math.floor(Math.random() * 80) + 10
-    const randomLeft = Math.floor(Math.random() * 80) + 10
+    const randomTop = Math.floor(Math.random() * 70) + 15;
+    const randomLeft = Math.floor(Math.random() * 70) + 15;
     
-    setNoProps({ top: `${randomTop}%`, left: `${randomLeft}%`, isMoved: true })
-    setMsgIndex((prev) => (prev + 1) % phrases.length)
-  }
+    setNoProps({ top: `${randomTop}%`, left: `${randomLeft}%`, isMoved: true });
+    setMsgIndex((prev) => prev + 1);
+  };
 
-  const bgStyle = { backgroundImage: `url(${backgroundImage})` }
+  const bgStyle = { backgroundImage: `url(${backgroundImage})` };
 
   if (accepted) {
     return (
       <div className="page-wrapper" style={bgStyle}>
-        <div className="card">
-          <h1 className="success-text">I knew you'd say yes! ❤️✨</h1>
+        <div className="card wider-card">
+          <img className='myImage' src={imageCouple} alt="Our Image" />
+          <h1 className="success-text">I knew you'd say yes! Tuku ❤️✨. Thats me dancin</h1>
           <img className="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExazhvM2YxaHZiODAwMjc0bTh6cDg3aThwd2EzOHVmaG40MGh0ODU5eiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/tlawNnswcTAmGjKRHQ/giphy.gif" alt="celebration" />
         </div>
       </div>
-    )
+    );
   }
 
   return (
     <div className="page-wrapper" style={bgStyle}>
-      <img className="sad-gif" src={sadGifs[msgIndex % sadGifs.length]} alt="sad" />
+      {/* GIF only appears after the first interaction with "No" */}
+      {msgIndex >= 0 && (
+        <img className="sad-gif" src={sadGifs[msgIndex % sadGifs.length]} alt="sad" />
+      )}
       
-      <div className="card">
-        <h1 className="title">Will you be my Valentine? 🌹</h1>
-        <div className="message-display">{phrases[msgIndex]}</div>
+      <div className="card wider-card">
+        <h1 className="title">Will you be my Valentine, Budi? 🌹</h1>
+        
+        <div className="message-display">
+        {msgIndex === -1 ? (
+            <span className="initial-msg">{initialRomanticMessage}</span>
+          ) : (
+            <span className="phrase-msg">{phrases[msgIndex % phrases.length]}</span>
+          )}
+        </div>
 
         <div className="btn-group">
           <button className="yes-btn" onClick={() => setAccepted(true)}>Yes</button>
@@ -77,7 +92,7 @@ function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
